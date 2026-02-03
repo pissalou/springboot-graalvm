@@ -1,6 +1,8 @@
 {
   "name": "GraalVM Dev Container",
-  "image": "ghcr.io/graalvm/native-image-community:22",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "forwardPorts": [],
   "postCreateCommand": "",
   "customizations": {
