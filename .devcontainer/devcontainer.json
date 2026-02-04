@@ -3,6 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "privileged": true,
   "forwardPorts": [],
   "postCreateCommand": "",
   "customizations": {
