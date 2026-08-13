@@ -1,28 +1,47 @@
 # springboot-graalvm
-Demo SpringBoot webapp build to distroless image using GraalVM
 
-## Getting started
-Build binary:
+Maven project for a Spring Boot 3 web backend.
+
+## Requirements
+
+- Java 21
+- Maven 3.9+
+
+## Run locally
+
 ```bash
-javac --version
-native-image --version
-CLASSNAME="HelloWorld"
-echo "public class $CLASSNAME { public static void main(String[] args) { System.out.println(\"Hello, Native World! \"); } }" > $CLASSNAME.java
-javac $CLASSNAME.java  # Compile to bytecode
-native-image $CLASSNAME  # Generate binary
-./${CLASSNAME,,}  # Execute binary
-ldd ${CLASSNAME,,}
+mvn spring-boot:run
 ```
 
-Build distroless container:
+Then open:
+
+- `http://localhost:8080/hello`
+
+## Run tests
+
+```bash
+mvn test
+```
+
+## Build native image (GraalVM)
+
+```bash
+mvn -Pnative -DskipTests package
+```
+
+The native executable is generated under `target/`.
+
+
+## Build distroless container
+
 ```bash
 podman --version
-BINARYNAME="helloworld"
+BINARYNAME="springboot-graalvm"
 podman build . -t $BINARYNAME:latest -f- << EOF
 FROM gcr.io/distroless/cc-debian13
-COPY $BINARYNAME .
+COPY target/$BINARYNAME .
 ENTRYPOINT ["/$BINARYNAME"]
 EOF
-podman run $BINARYNAME 2>/dev/null
+podman run -p 8080:8080 $BINARYNAME 2>/dev/null
 ```
 
