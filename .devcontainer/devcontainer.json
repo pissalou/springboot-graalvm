@@ -6,7 +6,10 @@
 
   "privileged": true,
   "forwardPorts": [],
-  "postCreateCommand": "",
+  "postCreateCommand": "mvn dependency:go-offline",
+  "containerEnv": {
+    "MAVEN_OPTS": "-Dmaven.offline=true"
+  },
   "customizations": {
     "vscode": {
       "extensions": [
