@@ -36,7 +36,7 @@ class HelloControllerMvcTests {
             .andExpect(status().isOk())
             .andExpect(view().name("hello"))
             .andExpect(model().attribute("message", "Hello from Spring Boot 3"))
-            .andExpect(content().string(org.hamcrest.Matchers.containsString("Hello from Spring Boot 3")));
+            .andExpect(content().string(org.hamcrest.Matchers.containsString("<h1>Hello from Spring Boot 3</h1>")));
     }
 }
 

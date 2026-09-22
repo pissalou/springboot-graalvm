@@ -19,6 +19,7 @@ public class HelloController {
 
     @GetMapping(value="/hello", produces=MediaType.TEXT_HTML_VALUE)
     public String hello(Model model) {
+        model.addAttribute("title", "Hello Spring Boot");
         model.addAttribute("message", "Hello from Spring Boot 3");
         return "hello";
     }
