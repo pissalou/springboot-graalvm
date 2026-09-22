@@ -6,9 +6,6 @@
   "features": {
     "ghcr.io/devcontainers/features/git:1": {}
   },
-  runArgs: [
-    "--userns=keep-id:uid=1000,gid=1000"
-  ],
   "privileged": true,
   "containerUser": "dev",
   "remoteUser": "dev",
@@ -16,7 +13,7 @@
   "forwardPorts": [],
   "postCreateCommand": "mvn dependency:collect dependency:go-offline && test \"$(stat -c '%u:%g' .)\" = \"1000:1000\" || (cat /proc/self/uid_map && id -u)",
   "containerEnv": {
-    "MAVEN_ARGS": "-Dmaven.offline=true",
+    "MAVEN_ARGS": "-Dmaven.offline=true"
   },
   "customizations": {
     "jetbrains": {
