@@ -10,12 +10,12 @@ Maven project for a Spring Boot 3 web backend.
 ## Run locally
 
 ```bash
-mvn spring-boot:run
+mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8080 # can alternatively use SERVER_PORT environment variable
 ```
 
 Then open:
 
-- `http://localhost:8080/hello`
+- `http://localhost:8080/`
 
 This route is handled by Spring MVC and rendered with a Mustache template.
 
@@ -51,19 +51,19 @@ Note: musl builds require a musl-capable GraalVM toolchain in the build environm
 ## Build distroless container
 
 ```bash
-podman --version
 BINARYNAME="springboot-graalvm"
+PORT=8080
+podman --version
 podman build . -t $BINARYNAME:latest -f- << EOF
 FROM gcr.io/distroless/cc-debian13
 COPY target/$BINARYNAME .
-ENTRYPOINT ["/$BINARYNAME"]
+ENTRYPOINT ["/$BINARYNAME", "--server.port=$PORT"]
 EOF
-podman run -p 8080:8080 $BINARYNAME 2>/dev/null
+podman run -p $PORT:$PORT $BINARYNAME 2>/dev/null
 ```
 
 TODO:
 - customize the devcontainer bash prompt to look like ohmyzsh
-- stop hardcoding the port number
 - introduce user login with OAuth spring security
 - make gdb debugger available in devcontainer
 - make a tf template to run on minikube with observability stack
