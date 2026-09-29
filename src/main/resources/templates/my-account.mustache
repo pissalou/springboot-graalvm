@@ -1,0 +1,23 @@
+{{#layout}}
+<section class="account-page">
+    <header class="account-header">
+        <a class="back-link" href="/hello">Home</a>
+        <form action="/logout" method="post">
+            <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
+            <button class="sign-out" type="submit">Sign out</button>
+        </form>
+    </header>
+    <div class="account-content">
+        <p class="eyebrow">YOUR PROFILE</p>
+        <h1>My account</h1>
+        <div class="profile-row">
+            {{#avatarUrl}}<img class="profile-avatar" src="{{avatarUrl}}" alt="">{{/avatarUrl}}
+            <div>
+                <h2>{{displayName}}</h2>
+                {{#email}}<p>{{email}}</p>{{/email}}
+            </div>
+        </div>
+        <p class="connected-provider">Signed in with <strong>{{providerName}}</strong></p>
+    </div>
+</section>
+{{/layout}}

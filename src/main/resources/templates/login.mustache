@@ -1,0 +1,16 @@
+{{#layout}}
+<section class="auth-page">
+    <a class="back-link" href="/hello">Home</a>
+    <div class="auth-panel">
+        <p class="eyebrow">SPRINGBOOT GRAALVM</p>
+        <h1>Welcome back</h1>
+        <p class="auth-intro">Sign in to view your account.</p>
+        {{#loginError}}<p class="auth-error" role="alert">Sign-in failed. Please try again.</p>{{/loginError}}
+        <nav class="provider-list" aria-label="Sign in with a provider">
+            <a class="provider-button github" href="/oauth2/authorization/github"><span aria-hidden="true">GH</span>Continue with GitHub</a>
+            <a class="provider-button google" href="/oauth2/authorization/google"><span aria-hidden="true">G</span>Continue with Google</a>
+            <a class="provider-button facebook" href="/oauth2/authorization/facebook"><span aria-hidden="true">f</span>Continue with Facebook</a>
+        </nav>
+    </div>
+</section>
+{{/layout}}

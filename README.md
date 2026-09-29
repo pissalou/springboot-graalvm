@@ -13,6 +13,29 @@ Maven project for a Spring Boot 3 web backend.
 mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8080 # can alternatively use SERVER_PORT environment variable
 ```
 
+Create OAuth applications with GitHub, Google, and Facebook, and configure each provider's redirect URI as:
+
+```text
+http://localhost:8080/login/oauth2/code/github
+http://localhost:8080/login/oauth2/code/google
+http://localhost:8080/login/oauth2/code/facebook
+```
+
+Export the client credentials before starting the app:
+
+```bash
+export GITHUB_CLIENT_ID=...
+export GITHUB_CLIENT_SECRET=...
+export GOOGLE_CLIENT_ID=...
+export GOOGLE_CLIENT_SECRET=...
+export FACEBOOK_CLIENT_ID=...
+export FACEBOOK_CLIENT_SECRET=...
+mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8080
+```
+
+The credentials are required for application startup; keep them outside source control. In production, register the matching HTTPS callback URLs for the deployed host.
+When running behind a reverse proxy, configure it to send `X-Forwarded-Host` and `X-Forwarded-Proto`; the app uses these headers for login and OAuth callback URLs.
+
 Then open:
 
 - `http://localhost:8080/`
@@ -64,7 +87,6 @@ podman run -p $PORT:$PORT $BINARYNAME 2>/dev/null
 
 TODO:
 - customize the devcontainer bash prompt to look like ohmyzsh
-- introduce user login with OAuth spring security
 - make gdb debugger available in devcontainer
 - make a tf template to run on minikube with observability stack
 - try `native-image` options to reduce image size (e.g. `--no-fallback`, `--no-server`, ...)
